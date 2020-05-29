@@ -25,8 +25,4 @@ export class ShopCardComponent implements OnInit {
 
   ngOnInit() {}
 
-  public onAdd(): void {
-    if (!this.disabledStatus) this.onAddMethod.emit(this.shopInfo.id);
-  }
-
 }

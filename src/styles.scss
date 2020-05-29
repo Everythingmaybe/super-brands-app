@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
@@ -16,6 +20,10 @@ body {
 
 .sub-panel-wrapper {
   display: flex;
+
+  @media screen and (max-width: 900px) {
+    flex-wrap: wrap;
+  }
 }
 
 .sub-panel {
@@ -24,12 +32,21 @@ body {
   width: 50%;
   & + & {
     margin-left: 40px;
+    width: calc(50% - 40px);
+    @media screen and (max-width: 900px) {
+      margin-top: 20px;
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    width: 100%;
   }
 }
 
 .border {
   border: 1px solid #33333329;
-  border-radius: 4px;
 }
 
 .border-dashed {
@@ -39,6 +56,10 @@ body {
 
 .shadow {
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.no-padding {
+  padding: 0 !important;
 }
 
 button {
@@ -65,6 +86,9 @@ button {
   border: 0;
   background-color: transparent;
   height: fit-content;
+  img {
+    vertical-align: middle
+  }
 }
 .icon-button-big {
   width: 40px;
@@ -73,4 +97,11 @@ button {
   background-color: rgba(0, 0, 0, 0.05);
   padding: 0;
   border: 0;
+}
+
+.sub-panel-title {
+  display: block;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.32);
+  margin-bottom: 10px;
 }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 export interface SpecialistResponse {
   id: number;
   fullName: string;
-  logo?: string;
+  avatar?: string;
 }
 
 export interface ShopResponse {
@@ -13,6 +13,8 @@ export interface ShopResponse {
 }
 
 const MOCK_MODE = true;
+
+const MOCK_AVATAR: string = 'assets/avatar.png';
 
 const MOCK_SPECIALISTS: SpecialistResponse[] = [
   {
@@ -43,7 +45,7 @@ const MOCK_SPECIALISTS: SpecialistResponse[] = [
     id: 7,
     fullName: 'Малыхин Клавдий Святославович',
   }
-];
+].map(s => ({ ...s, avatar: MOCK_AVATAR }));
 
 const MOCK_SHOPS: ShopResponse[] = [
   {

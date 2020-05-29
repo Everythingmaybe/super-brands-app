@@ -1,0 +1,55 @@
+<div class="actions">
+  <div *ngIf="!specialists.length" class="add-button-wrapper">
+    <app-add-specialist-button [items]="allowedSpecialists"
+                               (onSelectMethod)="createSpecialist($event)">
+    </app-add-specialist-button>
+    <span>Добавить специалиста</span>
+  </div>
+
+  <button type="button" class="button save-button">
+    Сохранение изменения
+    <img src="assets/icons/check.svg" alt="Сохранить изменения">
+  </button>
+</div>
+
+<div class="sub-panel-wrapper">
+  <div *ngIf="specialists.length; else notSpecialists" class="sub-panel no-padding shadow tabs-panel">
+    <app-specialists-tabs [specialists]="specialists"
+                          [allowedSpecialists]="allowedSpecialists"
+                          [(selected)]="selectedSpecialist"
+                          (onRemoveMethod)="removeSpecialist($event)"
+                          (onRemoveShopMethod)="removeShopFromSpecialist($event[0], $event[1])"
+                          (onAddMethod)="createSpecialist($event)">
+    </app-specialists-tabs>
+  </div>
+
+  <div class="sub-panel border-dashed shops-panel">
+    <span class="sub-panel-title">Нераспределёные магазины:
+      <span class="count">{{ unallocatedShops.length }}</span>
+      <img *ngIf="unallocatedShops.length" src="assets/icons/warning.svg">
+    </span>
+    <div class="shops-wrapper">
+      <div class="shop-item"
+           *ngFor="let shop of unallocatedShops; trackBy: trackByFn">
+        <button type="button"
+                class="icon-button"
+                [disabled]="!selectedSpecialist"
+                (click)="addShopToSpecialist(shop.id)">
+          <img src="assets/icons/arrow.svg" alt="Добавить магазин">
+        </button>
+        <app-shop-card [shopInfo]="shop"
+                       [disabled]="!selectedSpecialist">
+        </app-shop-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #notSpecialists>
+  <div class="sub-panel border-dashed not-specialists">
+    <span class="message">Специалист не назначен</span>
+    <span class="info">Чтобы начать работу с нераспределенными магазинами, вам необходимо добавить хотя бы одного специалиста</span>
+    <img src="assets/add-person.svg" alt="Специалист не назначен">
+  </div>
+</ng-template>

@@ -1,0 +1,108 @@
+:host {
+  min-height: 100%;
+  display: block;
+  position: relative;
+  padding: 25px 25px 30px;
+  background-color: #fff;
+}
+
+.tab-headers {
+  position: absolute;
+  top: -63px;
+  left: 0;
+  display: flex;
+
+  app-add-specialist-button {
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+}
+
+.tab-header {
+  padding: 10px;
+  border-top-right-radius: 50%;
+  border-top-left-radius: 50%;
+  background-color: #f2f2f2;
+  border: 0;
+  opacity: 0.9;
+  box-shadow: 0px -5px 5px 0px rgba(0, 0, 0, 0.02);
+  position: relative;
+
+  & + & {
+    margin-left: 1px;
+  }
+
+  &.active {
+    background-color: #fff;
+    opacity: 1;
+  }
+
+  img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+  }
+
+  .count {
+    position: absolute;
+    top: 5px;
+    left: 35px;
+    background-color: #007AFF;
+    color: #fff;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    span {
+      font-size: 11px;
+      font-weight: bold;
+    }
+  }
+}
+
+.specialist-section {
+  margin-bottom: 30px;
+}
+
+.specialist {
+  display: flex;
+  align-items: center;
+
+  .avatar {
+    width: 32px;
+    height: 32px;
+    margin-right: 16px;
+  }
+
+  .info {
+    margin-right: 16px;
+  }
+
+  .specialist-shops {
+    color: #007AFF;
+  }
+
+  button {
+    margin-left: auto;
+  }
+}
+
+.shop-item {
+  display: flex;
+  align-items: center;
+
+  button {
+    margin-left: auto;
+  }
+}
+
+.has-not-shops {
+  margin-top: 10px;
+
+  span {
+    margin-right: 12px;
+  }
+
+  img {
+    vertical-align: middle;
+  }
+}

@@ -1,0 +1,64 @@
+<div *ngIf="specialists.length" class="tab-headers">
+  <button *ngFor="let specialist of specialists; trackBy: trackByFn"
+          (click)="selected = specialist"
+          [ngClass]="{active: selected?.id === specialist.id}"
+          class="tab-header">
+    <img [src]="specialist.avatar" [alt]="specialist.fullName">
+    <div *ngIf="specialist.shopIds.length as shopsCount" class="count">
+      <span>{{ shopsCount }}</span>
+    </div>
+  </button>
+
+  <app-add-specialist-button *ngIf="allowedSpecialists.length"
+                             [items]="allowedSpecialists"
+                             (onSelectMethod)="onAdd($event)">
+  </app-add-specialist-button>
+</div>
+
+<div class="tab-wrappers">
+  <div *ngFor="let specialist of specialists; trackBy: trackByFn">
+    <ng-container *ngIf="specialist.id === selected?.id">
+
+      <div class="specialist-section">
+        <span class="sub-panel-title">Специалист</span>
+
+        <div class="specialist">
+          <img class="avatar" [src]="specialist.avatar" [alt]="specialist.fullName">
+          <span class="info">{{ specialist.fullName }}</span>
+<!--          Todo: Добавить возможность подставление необходимого окончания -->
+          <span class="specialist-shops">количество магазинов: {{ specialist.shopIds.length }}</span>
+          <button (click)="onRemove(specialist.id)"
+                  class="icon-button">
+            <img src="assets/icons/trash.svg" alt="Удалить специалиста">
+          </button>
+        </div>
+      </div>
+
+      <div class="shops-section">
+        <span class="sub-panel-title">Магазины</span>
+        <div *ngIf="specialist.shopIds.length; else hasNotShops"
+             class="shop-items" >
+
+          <div *ngFor="let shopId of specialist.shopIds; trackBy: trackByFn"
+               class="shop-item">
+            <app-shop-card [shopInfo]="getShopById(shopId)"></app-shop-card>
+
+            <button (click)="onRemoveShop(shopId, specialist.id)"
+                    type="button"
+                    class="icon-button">
+              <img src="assets/icons/minus.svg" alt="Удалить магазин">
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #hasNotShops>
+  <div class="has-not-shops">
+    <span>Не назначены</span>
+    <img src="assets/icons/warning.svg">
+  </div>
+</ng-template>
