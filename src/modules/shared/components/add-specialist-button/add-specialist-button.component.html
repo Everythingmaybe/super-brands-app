@@ -1,0 +1,9 @@
+<button (click)="showItems()" type="button" class="icon-button-big">
+  <img src="assets/icons/plus.svg" alt="Добавить специалиста">
+</button>
+<div *ngIf="showingItems" class="item-list shadow">
+  <div *ngFor="let item of items" (click)="onSelect(item)" class="item">
+    <img class="item-img" [src]="item.avatar" [alt]="item.fullName">
+    <span class="item-info">{{item.fullName}}</span>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+:host {
+  position: relative;
+  display: inline-block;
+}
+
+.item-list {
+  z-index: 1;
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 7px 15px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: .8;
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+
+  &-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  &-info {
+    font-size: 12px;
+    white-space: nowrap
+  }
+}
