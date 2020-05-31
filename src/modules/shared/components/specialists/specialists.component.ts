@@ -11,10 +11,13 @@ import { Shop, Specialist, SpecialistsService } from './specialists.service';
 })
 export class SpecialistsComponent implements OnInit {
 
+  private initSpecialists: Specialist[];
+
   public specialists: Specialist[] = [];
   public allSpecialists: Specialist[] = [];
   public selectedSpecialist: Specialist = null;
   public shops: Shop[] = [];
+  public saving: boolean = false;
 
   public get unallocatedShops(): Shop[] {
     return this.shops.filter((s) => !s.specialistId);
@@ -24,6 +27,10 @@ export class SpecialistsComponent implements OnInit {
     return this.allSpecialists.filter((s) => !this.specialists
       .some((spec) => spec.id === s.id));
   };
+
+  public get isModified(): boolean {
+    return lodash.isEqual(this.initSpecialists, this.specialists);
+  }
 
   constructor(
     private specialistsService: SpecialistsService,
@@ -36,6 +43,7 @@ export class SpecialistsComponent implements OnInit {
   public loadData(): void {
     this.allSpecialists = this.specialistsService.getSpecialists();
     this.shops = this.specialistsService.getShops();
+    this.initSpecialists = lodash.cloneDeep(this.specialists);
   }
 
   public createSpecialist(specialist: Specialist): void {
@@ -83,6 +91,14 @@ export class SpecialistsComponent implements OnInit {
 
     this.shops = shops;
     this.specialists = specialists;
+  }
+
+  public onSave(): void {
+    this.saving = true;
+    setTimeout(() => {
+      this.initSpecialists = lodash.cloneDeep(this.specialists);
+      this.saving = false;
+    }, 1000);
   }
 
   public trackByFn(index, item): number {

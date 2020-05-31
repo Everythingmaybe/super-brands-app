@@ -6,7 +6,10 @@
     <span>Добавить специалиста</span>
   </div>
 
-  <button type="button" class="button save-button">
+  <button type="button"
+          [disabled]="isModified || saving"
+          (click)="onSave()"
+          class="button save-button">
     Сохранение изменения
     <img src="assets/icons/check.svg" alt="Сохранить изменения">
   </button>
