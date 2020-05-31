@@ -25,8 +25,9 @@
         <div class="specialist">
           <img class="avatar" [src]="specialist.avatar" [alt]="specialist.fullName">
           <span class="info">{{ specialist.fullName }}</span>
-<!--          Todo: Добавить возможность подставление необходимого окончания -->
-          <span class="specialist-shops">количество магазинов: {{ specialist.shopIds.length }}</span>
+          <span class="specialist-shops">
+            {{ specialist.shopIds.length | i18nPlural: {'=1': '1 магазин', 'few': '# магазина', 'other': '# магазинов'}: 'ru' }}
+          </span>
           <button (click)="onRemove(specialist.id)"
                   class="icon-button">
             <img src="assets/icons/trash.svg" alt="Удалить специалиста">
